@@ -5,7 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isOpen1, setIsOpen1 } = useContext(AuthContext);
+  const { setIsOpen1 } = useContext(AuthContext);
   return (
     <nav className="flex z-50 md:py-0 items-center justify-between bg-gray-800 text-white py-4 px-6 md:px-10">
       <div className="flex items-center w-24 overflow-hidden justify-center">

@@ -7,8 +7,29 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import ShowClassCard from "../../../components/ShowClassCard";
+import { useEffect, useState } from "react";
 const PopularClass = () => {
+  const [slidesPerView, setSlidesPerView] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth >= 768) {
+        setSlidesPerView(3);
+      } else {
+        setSlidesPerView(1);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   // TODO: replace the object with real data
+  // TODO: add enrolded student number and sort the data by the number
+
   const danceClasses = [
     {
       _id: 1,
@@ -47,23 +68,19 @@ const PopularClass = () => {
       instructorName: "Carlos Rodriguez",
     },
   ];
-
   return (
     <div>
       <SectionTitle title={"Popular Classes"} />
       <div className="my-5">
         <Swiper
-          slidesPerView={3}
+          slidesPerView={slidesPerView}
           spaceBetween={30}
           pagination={{
             clickable: true,
           }}
           modules={[Pagination]}
-          className="mySwiper"
+          className="mySwiper lg:slides-per-view-3"
         >
-          {/* <SwiperSlide>
-            <ShowClassCard />
-          </SwiperSlide> */}
           {danceClasses.map((danceClass) => (
             <SwiperSlide key={danceClass?._id}>
               <ShowClassCard danceClass={danceClass} />
