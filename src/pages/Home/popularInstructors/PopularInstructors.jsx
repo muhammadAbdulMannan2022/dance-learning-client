@@ -67,6 +67,7 @@ const PopularInstructors = () => {
     <div className="my-20">
       <SectionTitle title={"Popular Instrucktors"} />
       <div className="my-5 py-5">
+        {console.log(slidesPerView)}
         <Swiper
           slidesPerView={slidesPerView}
           spaceBetween={30}
@@ -77,7 +78,7 @@ const PopularInstructors = () => {
           className="mySwiper"
         >
           {dancingSchoolInstructors.map((instructor) => (
-            <SwiperSlide className="w-[200px]" key={instructor?._id}>
+            <SwiperSlide className="md:w-[200px]" key={instructor?._id}>
               <ShowInstructor instructor={instructor} />
             </SwiperSlide>
           ))}
