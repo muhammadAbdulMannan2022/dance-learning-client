@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { HiMenu, HiOutlineX, HiUser } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { isOpen1, setIsOpen1 } = useContext(AuthContext);
   return (
-    <nav className="flex md:py-0 items-center justify-between bg-gray-800 text-white py-4 px-6 md:px-10">
+    <nav className="flex z-50 md:py-0 items-center justify-between bg-gray-800 text-white py-4 px-6 md:px-10">
       <div className="flex items-center w-24 overflow-hidden justify-center">
         <Link to="/">
           <img
@@ -19,11 +20,14 @@ const Navbar = () => {
       {/* links */}
       <div
         className={`flex md:flex-row md:block flex-col absolute md:relative top-0 right-0 w-full md:w-auto h-screen md:h-auto bg-slate-900 md:bg-inherit backdrop-blur-md bg-opacity-50 p-10 md:p-0 ${
-          isOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"
+          isOpen ? "translate-x-0" : "translate-x-full hidden md:translate-x-0"
         }`}
       >
         <div
-          onClick={() => setIsOpen(false)}
+          onClick={() => {
+            setIsOpen(false);
+            setIsOpen1(false);
+          }}
           className="bg-gray-600 z-50 md:hidden hover:bg-gray-700 cursor-pointer w-12 h-12 rounded-full flex items-center justify-center"
         >
           <HiOutlineX className="w-10 h-10" />
@@ -50,7 +54,10 @@ const Navbar = () => {
         {/* Hamburger Menu */}
         <div className="md:hidden">
           <button
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsOpen(true);
+              setIsOpen1(true);
+            }}
             className="text-white focus:outline-none"
           >
             <HiMenu className="w-10 h-10" />

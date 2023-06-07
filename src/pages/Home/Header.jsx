@@ -6,13 +6,21 @@ import "swiper/css";
 import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 // https://i.ibb.co/M27RRn5/315656-1600x1030-how-start-dance-team.jpg
 // https://i.ibb.co/yS8qFwG/Depositphotos-104115466-s-2019.jpg
 // https://i.ibb.co/z7MyGDv/jumping-dancers-scaled.jpg
 export default function Header() {
+  const { isOpen1 } = useContext(AuthContext);
   return (
     <>
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+      <Swiper
+        style={{ zIndex: `${isOpen1 ? "-5" : "0"}` }}
+        navigation={true}
+        modules={[Navigation]}
+        className="mySwiper"
+      >
         <SwiperSlide>
           <div
             className={`bg-banner-bg bg-cover bg-center w-full h-[600px] flex items-center bg-[url('https://i.ibb.co/M27RRn5/315656-1600x1030-how-start-dance-team.jpg')]`}
