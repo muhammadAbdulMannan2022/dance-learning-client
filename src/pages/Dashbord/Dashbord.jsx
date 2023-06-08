@@ -1,43 +1,82 @@
-import { Helmet } from "react-helmet-async";
-import { FaHome, FaPhoneVolume, FaWallet } from "react-icons/fa";
-// import useCartItems from "../../hooks/useCartItems";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
-const Dashboard = () => {
-  const isAdmin = true;
+const Dashbord = () => {
+  const [users, setUsers] = useState([]);
+  const roleOptions = ["student", "admin", "instructor"];
+  const [selectedRoles, setSelectedRoles] = useState(
+    users.reduce((acc, user) => {
+      acc[user.id] = user.rol;
+      return acc;
+    }, {})
+  );
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      });
+  }, []);
+  const handleRoleChange = (userId, event, name) => {
+    const newRole = event.target.value;
+    setSelectedRoles((prevRoles) => ({
+      ...prevRoles,
+      [userId]: newRole,
+    }));
+    console.log(newRole);
+    Swal.fire({
+      title: "Are you sure?",
+      text: `you want to make ${name} as ${newRole}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
   return (
-    <div className="text-xl text-gray-900 font-semibold w-full">
-      {isAdmin ? (
-        ""
-      ) : (
-        <>
-          <Helmet>
-            <title>Bistro Boss || Dashboard</title>
-          </Helmet>
-          <h1 className="text-white font-bold mb-10 mt-5">Hi, Welcome Back!</h1>
-          <div className="flex justify-center items-center gap-5 md:flex-row flex-wrap flex-col w-full">
-            <div className="flex items-center justify-center text-white bg-gradient-to-l from-gray-700 to-gray-600 rounded px-20 py-7 gap-3 w-full md:w-auto shadow">
-              <FaWallet className="h-7 w-7" />
-              <h1 className="text-3xl">
-                204 <p className="text-sm">Menu</p>
-              </h1>
-            </div>
-            <div className="flex items-center justify-center text-white bg-gradient-to-l from-gray-700 to-gray-600 rounded px-20 py-7 gap-3 w-full md:w-auto shadow">
-              <FaHome className="h-7 w-7" />
-              <h1 className="text-3xl">
-                104 <p className="text-sm">shop</p>
-              </h1>
-            </div>
-            <div className="flex items-center justify-center text-white bg-gradient-to-l from-gray-700 to-gray-600 rounded px-20 py-7 gap-3 w-full md:w-auto shadow">
-              <FaPhoneVolume className="h-7 w-7" />
-              <h1 className="text-3xl">
-                04 <p className="text-sm">Contact</p>
-              </h1>
-            </div>
-          </div>
-        </>
-      )}
+    <div className="bg-green-900 w-full md:w-3/4">
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-full border border-gray-300">
+          <thead>
+            <tr>
+              {/* <th className="py-2 px-4 border-b">ID</th> */}
+              <th className="py-2 px-4 border-b">Name</th>
+              <th className="py-2 px-4 border-b">Email</th>
+              <th className="py-2 px-4 border-b">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user._id}>
+                {/* <td className="py-2 px-4 border-b">{user.id}</td> */}
+                <td className="py-2 px-4 border-b">{user.name}</td>
+                <td className="py-2 px-4 border-b">{user.email}</td>
+                <td className="py-2 px-4 border-b">
+                  <select
+                    defaultValue={user.rol}
+                    onChange={(e) => handleRoleChange(user._id, e, user.name)}
+                    className="block w-full py-1 px-2 border border-gray-300 rounded-md"
+                  >
+                    {roleOptions.map((role) => (
+                      <option key={role} value={role}>
+                        {role}
+                      </option>
+                    ))}
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default Dashbord;
