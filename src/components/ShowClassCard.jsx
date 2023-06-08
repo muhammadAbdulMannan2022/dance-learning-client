@@ -1,7 +1,13 @@
 // eslint-disable-next-line react/prop-types
 const ShowClassCard = ({ danceClass }) => {
-  const { imageUrl, nameOfTheClass, availableSeats, info, instructorName } =
-    danceClass;
+  const {
+    imageUrl,
+    nameOfTheClass,
+    availableSeats,
+    info,
+    instructorName,
+    price,
+  } = danceClass;
   const shortInfo = info.slice(0, 50);
 
   return (
@@ -19,7 +25,7 @@ const ShowClassCard = ({ danceClass }) => {
         <p>Available Seats: {availableSeats}</p>
         <p className="text-gray-700 mt-2">{shortInfo}...</p>
         <div className="flex items-center mt-4">
-          <span className="text-gray-800 font-bold">$49.99</span>
+          <span className="text-gray-800 font-bold">${price}</span>
           <button className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Add to Cart
           </button>

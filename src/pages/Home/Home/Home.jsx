@@ -1,4 +1,5 @@
 import Header from "../Header";
+import Contactus from "../contactus/Contactus";
 import PopularInstructors from "../popularInstructors/PopularInstructors";
 import PopularClass from "../popularclasses/PopularClass";
 
@@ -8,6 +9,7 @@ const Home = () => {
       <Header />
       <PopularClass />
       <PopularInstructors />
+      <Contactus />
     </>
   );
 };

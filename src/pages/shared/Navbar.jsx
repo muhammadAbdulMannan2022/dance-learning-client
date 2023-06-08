@@ -37,10 +37,13 @@ const Navbar = () => {
             <Link>Home</Link>
           </li>
           <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-            <Link>About</Link>
+            <Link>Instructors</Link>
           </li>
           <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-            <Link>Contact</Link>
+            <Link>clssses</Link>
+          </li>
+          <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
+            <Link>Dashboard</Link>
           </li>
         </ul>
       </div>
