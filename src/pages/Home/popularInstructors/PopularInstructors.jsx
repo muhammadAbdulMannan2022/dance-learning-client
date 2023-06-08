@@ -67,7 +67,7 @@ const PopularInstructors = () => {
     <div className="my-20">
       <SectionTitle title={"Popular Instrucktors"} />
       <div className="my-5 py-5">
-        {console.log(slidesPerView)}
+        {/* {console.log(slidesPerView)} */}
         <Swiper
           slidesPerView={slidesPerView}
           spaceBetween={30}

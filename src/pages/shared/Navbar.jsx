@@ -5,7 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { setIsOpen1 } = useContext(AuthContext);
+  const { setIsOpen1, user, logOutUser } = useContext(AuthContext);
   return (
     <nav className="flex z-50 md:py-0 items-center justify-between bg-gray-800 text-white py-4 px-6 md:px-10">
       <div className="flex items-center w-24 overflow-hidden justify-center">
@@ -42,18 +42,41 @@ const Navbar = () => {
           <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
             <Link>clssses</Link>
           </li>
-          <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-            <Link>Dashboard</Link>
-          </li>
+          {user && (
+            <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
+              <Link>Dashboard</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="flex items-center gap-3">
         <div className={``}>
-          <div className={`border rounded-full cursor-pointer overflow-hidden`}>
-            {/* <img src="" alt="" className="h-10 w-10" /> */}
-            <HiUser className="h-10 w-10 -z-10" />
-          </div>
+          {user && (
+            <div
+              className={`border rounded-full cursor-pointer overflow-hidden`}
+            >
+              <img
+                src={`${user.photoURL}`}
+                alt={`${user.displayName}`}
+                className="h-10 w-10"
+              />
+            </div>
+          )}
         </div>
+        {user ? (
+          <button
+            onClick={logOutUser}
+            className="py-1 px-2 rounded bg-slate-900 hover:bg-slate-700"
+          >
+            Log Out
+          </button>
+        ) : (
+          <Link to="/login">
+            <button className="py-1 px-2 rounded bg-slate-900 hover:bg-slate-700">
+              Log In
+            </button>
+          </Link>
+        )}
         {/* Hamburger Menu */}
         <div className="md:hidden">
           <button
