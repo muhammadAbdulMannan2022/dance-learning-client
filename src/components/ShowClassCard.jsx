@@ -11,10 +11,10 @@ const ShowClassCard = ({ danceClass }) => {
   const shortInfo = info.slice(0, 50);
 
   return (
-    <div className="max-w-md mx-auto h-[500px] bg-white rounded-lg shadow-lg">
+    <div className="mx-auto w-[400px] h-[500px] bg-white rounded-lg shadow-lg">
       <img
-        style={{ height: "200px" }}
-        className="w-full"
+        style={{ height: "200px", width: "400px" }}
+        className="w-full rounded"
         src={imageUrl}
         alt="Product"
       />

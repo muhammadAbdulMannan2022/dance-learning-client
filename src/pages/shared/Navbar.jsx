@@ -40,7 +40,7 @@ const Navbar = () => {
             <Link>Instructors</Link>
           </li>
           <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-            <Link>clssses</Link>
+            <Link to="/classes">clssses</Link>
           </li>
           {user && (
             <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
