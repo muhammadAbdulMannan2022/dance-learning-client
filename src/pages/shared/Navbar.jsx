@@ -33,19 +33,27 @@ const Navbar = () => {
           <HiOutlineX className="w-10 h-10" />
         </div>
         <ul className="flex flex-col md:flex-row mt-10 md:mt-0 gap-4 transition-colors">
-          <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-            <Link>Home</Link>
-          </li>
-          <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-            <Link>Instructors</Link>
-          </li>
-          <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-            <Link to="/classes">clssses</Link>
-          </li>
-          {user && (
+          <Link>
             <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
-              <Link>Dashboard</Link>
+              Home
             </li>
+          </Link>
+          <Link>
+            <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
+              Instructors
+            </li>
+          </Link>
+          <Link to="/classes">
+            <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
+              clssses
+            </li>
+          </Link>
+          {user && (
+            <Link to="/dashbord">
+              <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
+                Dashboard
+              </li>
+            </Link>
           )}
         </ul>
       </div>
