@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaChalkboardTeacher, FaHome, FaUsers, FaWallet } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaHome,
+  FaMoneyBill,
+  FaPlus,
+  FaUsers,
+  FaWallet,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { HiBookmark } from "react-icons/hi";
@@ -27,6 +34,18 @@ const Sidenav = () => {
       name: "Manage users",
       path: "/dashbord",
       icon: FaUsers,
+    },
+  ];
+  const instructorsLinks = [
+    {
+      name: "Add a Class",
+      path: "/dashbord/addClass",
+      icon: FaPlus,
+    },
+    {
+      name: "My Classes",
+      path: "/dashbord",
+      icon: FaMoneyBill,
     },
   ];
   const studentLinks = [
@@ -67,6 +86,15 @@ const Sidenav = () => {
         ))}
       {rol === "student" &&
         studentLinks.map((adLink) => (
+          <Link key={adLink.path} to={adLink.path}>
+            <div className="bg-slate-200 flex items-center justify-between px-3 py-3 rounded hover:bg-slate-400">
+              <p className="hidden md:block">{adLink.name}</p>
+              <div>{React.createElement(adLink?.icon, { size: "30" })}</div>
+            </div>
+          </Link>
+        ))}
+      {rol === "instructor" &&
+        instructorsLinks.map((adLink) => (
           <Link key={adLink.path} to={adLink.path}>
             <div className="bg-slate-200 flex items-center justify-between px-3 py-3 rounded hover:bg-slate-400">
               <p className="hidden md:block">{adLink.name}</p>

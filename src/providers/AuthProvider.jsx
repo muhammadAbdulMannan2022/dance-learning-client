@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+// TODO: change the status and role
 import app from "../firebase/firebase.config";
 const auth = getAuth(app);
 export const AuthContext = createContext(null);
