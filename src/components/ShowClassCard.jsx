@@ -1,6 +1,12 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
 // eslint-disable-next-line react/prop-types
 const ShowClassCard = ({ danceClass }) => {
+  const { user, loading } = useContext(AuthContext);
+  const [userId, setUserId] = useState("");
   const {
+    _id,
     imageUrl,
     nameOfTheClass,
     availableSeats,
@@ -9,7 +15,46 @@ const ShowClassCard = ({ danceClass }) => {
     price,
   } = danceClass;
   const shortInfo = info.slice(0, 50);
-
+  useEffect(() => {
+    if (!loading) {
+      fetch(`http://localhost:5000/role?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setUserId(data._id);
+        });
+    }
+  }, [loading, user]);
+  const handleAddToCart = (clas, userId) => {
+    const { _id, nameOfTheClass, instructorName, instructorEmail } = clas;
+    const dataToSave = {
+      classId: _id,
+      nameOfTheClass,
+      instructorName,
+      instructorEmail,
+      selectedBy: userId,
+    };
+    fetch(`http://localhost:5000/carts/${_id}/${userId}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(dataToSave),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.massege) {
+          Swal.fire({
+            position: "top-end",
+            text: data?.massege,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="mx-auto w-[400px] h-[500px] bg-white rounded-lg shadow-lg">
       <img
@@ -26,7 +71,10 @@ const ShowClassCard = ({ danceClass }) => {
         <p className="text-gray-700 mt-2">{shortInfo}...</p>
         <div className="flex items-center mt-4">
           <span className="text-gray-800 font-bold">${price}</span>
-          <button className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            onClick={() => handleAddToCart(danceClass, userId)}
+            className="ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
             Add to Cart
           </button>
         </div>
