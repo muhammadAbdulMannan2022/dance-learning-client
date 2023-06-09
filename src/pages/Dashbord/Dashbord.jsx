@@ -47,7 +47,23 @@ const Dashbord = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        const newUserRol = { rol: newRole };
+        fetch(`http://localhost:5000/makeinstructor/${userId}`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUserRol),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            Swal.fire(
+              `${newRole}!`,
+              `this user is now an ${newRole}.`,
+              "success"
+            );
+          });
       }
     });
   };
