@@ -41,11 +41,11 @@ const AddAClass = () => {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+          console.log(data.data.url);
           // Handle the response data here
           try {
             const theClass = {
-              imageUrl: data.url,
+              imageUrl: data.data.url,
               nameOfTheClass: className.value,
               availableSeats: availableSeats.value,
               price: price.value,
@@ -55,6 +55,7 @@ const AddAClass = () => {
               instructorEmail: instructorEmail.value,
               status: "panding",
             };
+
             const res = await fetch(`http://localhost:5000/classes`, {
               method: "POST",
               headers: {
