@@ -35,19 +35,53 @@ const ManageClass = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        const newStatus = { status: newRole };
-        fetch(`http://localhost:5000/classes/status/${classId}`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(newStatus),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
+        let newStatus = { status: newRole };
+        console.log(newRole);
+        if (newRole == "reject") {
+          console.log("rejected");
+          Swal.fire({
+            title: "write a review",
+            input: "text",
+            inputAttributes: {
+              autocapitalize: "off",
+            },
+            showCancelButton: true,
+            confirmButtonText: "submit",
+            showLoaderOnConfirm: true,
+            preConfirm: (login) => {
+              newStatus = { status: newRole, review: login };
+              fetch(`http://localhost:5000/classes/status/${classId}`, {
+                method: "PATCH",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(newStatus),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log(data);
+                  Swal.fire(
+                    `${newRole}!`,
+                    `the class is ${newRole}.`,
+                    "success"
+                  );
+                });
+            },
           });
-        Swal.fire(`${newRole}!`, `the class is ${newRole}.`, "success");
+        } else {
+          fetch(`http://localhost:5000/classes/status/${classId}`, {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newStatus),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              Swal.fire(`${newRole}!`, `the class is ${newRole}.`, "success");
+            });
+        }
       }
     });
   };
