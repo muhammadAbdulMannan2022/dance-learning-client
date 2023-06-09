@@ -18,11 +18,11 @@ const ManageClass = () => {
     }, {})
   );
 
-  const handleRoleChange = (userId, event, name) => {
+  const handleRoleChange = (classId, event, name) => {
     const newRole = event.target.value;
     setSelectedRoles((prevRoles) => ({
       ...prevRoles,
-      [userId]: newRole,
+      [classId]: newRole,
     }));
     console.log(newRole);
     Swal.fire({
@@ -35,6 +35,18 @@ const ManageClass = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
+        const newStatus = { status: newRole };
+        fetch(`http://localhost:5000/classes/status/${classId}`, {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newStatus),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
         Swal.fire(`${newRole}!`, `the class is ${newRole}.`, "success");
       }
     });
