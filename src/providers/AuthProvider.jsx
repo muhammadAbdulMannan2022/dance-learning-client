@@ -15,6 +15,7 @@ export const AuthContext = createContext(null);
 const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userFdb, setUserFdb] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isOpen1, setIsOpen1] = useState(false);
   const gitHubLogin = () => {
@@ -34,17 +35,32 @@ const AuthProvider = ({ children }) => {
       console.log("sign out success");
     });
   };
+  // const getCurrentUser = () => {
+  //   setLoading(true);
+
+  // };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      if (user) {
+        setLoading(true);
+        console.log(loading);
+        fetch(`http://localhost:5000/user?email=${user.email}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setUserFdb(data);
+            setLoading(false);
+          });
+      }
+      // setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [user]);
   const AuthData = {
     isOpen1,
     setIsOpen1,
     user,
+    userFdb,
     loading,
     setLoading,
     logOutUser,
