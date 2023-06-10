@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Dashbord = () => {
   const { user, loading, setLoading, userFdb } = useContext(AuthContext);
@@ -73,6 +74,16 @@ const Dashbord = () => {
           });
       }
     });
+  };
+  const copyId = (id) => {
+    navigator.clipboard
+      .writeText(id)
+      .then(() => {
+        console.log("Text copied to clipboard!");
+      })
+      .catch((error) => {
+        console.error("Failed to copy text:", error);
+      });
   };
   return (
     <div className="w-full md:w-3/4">
@@ -152,10 +163,20 @@ const Dashbord = () => {
                       {selectedClass.map((item) => (
                         <tr key={item._id}>
                           <td className="px-6 py-4 whitespace-nowrap">
+                            {console.log("items is ", item)}
                             <div className="flex items-center">
                               <div className="ml-4">
                                 <div className="text-sm font-medium text-gray-900">
                                   {item?.nameOfTheClass}
+                                </div>
+                                <div className="flex">
+                                  id :
+                                  <div
+                                    onClick={() => copyId(item?.classId)}
+                                    className="text-sm cursor-pointer font-medium text-gray-900 bg-slate-300 rounded px-1"
+                                  >
+                                    {item?.classId}
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -177,9 +198,14 @@ const Dashbord = () => {
                             <button className="px-2 text-center inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                               remove
                             </button>
-                            <button className="px-2 py-1 flex items-center justify-center text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              pay
-                            </button>
+                            <Link
+                              state={{ id: item?.classId, price: item.price }}
+                              to="/dashbord/payment"
+                            >
+                              <button className="px-2 py-1 flex items-center justify-center text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                pay
+                              </button>
+                            </Link>
                           </td>
                         </tr>
                       ))}
