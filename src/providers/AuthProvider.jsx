@@ -49,12 +49,14 @@ const AuthProvider = ({ children }) => {
           .then((res) => res.json())
           .then((data) => {
             setUserFdb(data);
+            console.log(data);
             setLoading(false);
           });
       }
-      // setLoading(false);
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, [user]);
   const AuthData = {
     isOpen1,
@@ -68,6 +70,7 @@ const AuthProvider = ({ children }) => {
     emailPasswordSignup,
     logInUserEmailPassword,
   };
+  console.log(userFdb);
   return (
     <AuthContext.Provider value={AuthData}>{children}</AuthContext.Provider>
   );

@@ -11,6 +11,9 @@ import AddAClass from "../pages/Dashbord/addAclass/AddAClass";
 import ManageClass from "../pages/Dashbord/manageClass/ManageClass";
 import EnrolledClass from "../pages/Dashbord/enrolledClass/EnrolledClass";
 import Payment from "../pages/Dashbord/payment/Payment";
+import Onlyuser from "../private/Onlyuser";
+import Onlyinstructor from "../private/OnlyInstructor";
+import Onlyadmin from "../private/OnlyAdmin";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,7 +39,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashbord",
-    element: <DashboardLayout />,
+    element: (
+      <Onlyuser>
+        <DashboardLayout />
+      </Onlyuser>
+    ),
     children: [
       {
         path: "/dashbord/",
@@ -44,11 +51,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashbord/addClass",
-        element: <AddAClass />,
+        element: (
+          <Onlyinstructor>
+            <AddAClass />
+          </Onlyinstructor>
+        ),
       },
       {
         path: "/dashbord/manageclasses",
-        element: <ManageClass />,
+        element: (
+          <Onlyadmin>
+            <ManageClass />
+          </Onlyadmin>
+        ),
       },
       {
         path: "/dashbord/myenrolledclasses",

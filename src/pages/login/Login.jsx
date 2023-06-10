@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { AiFillGithub } from "react-icons/ai";
@@ -8,11 +8,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const goto = location?.state?.pathname || "/";
   const { logInUserEmailPassword, gitHubLogin } = useContext(AuthContext);
   const handleGithubLogin = () => {
     gitHubLogin()
       .then((res) => {
         console.log(res);
+        navigate(goto);
       })
       .catch((error) => {
         setError(error.message);
@@ -27,6 +31,7 @@ const Login = () => {
         setError("");
         setEmail("");
         setPassword("");
+        navigate(goto);
       })
       .catch((error) => {
         console.log(error.message);
@@ -36,6 +41,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center flex-col">
+      {console.log(location.state)}
       <h1 className="text-2xl font-bold mb-5 mt-5">Login now</h1>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full md:w-1/2 ">
         <form onSubmit={handleSubmit} className="">
