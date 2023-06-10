@@ -10,6 +10,7 @@ const ShowClassCard = ({ danceClass }) => {
     imageUrl,
     nameOfTheClass,
     availableSeats,
+    enrolledStudents,
     info,
     instructorName,
     price,
@@ -68,6 +69,7 @@ const ShowClassCard = ({ danceClass }) => {
         <h3 className="text-xl font-bold">By {instructorName}</h3>
 
         <p>Available Seats: {availableSeats}</p>
+        <p>Enrolled Students: {enrolledStudents}</p>
         <p className="text-gray-700 mt-2">{shortInfo}...</p>
         <div className="flex items-center mt-4">
           <span className="text-gray-800 font-bold">${price}</span>
