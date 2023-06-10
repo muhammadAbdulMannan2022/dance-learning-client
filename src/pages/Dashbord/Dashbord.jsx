@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import MyClasses from "./my classes/MyClasses";
 
 const Dashbord = () => {
-  const { user, loading, setLoading, userFdb } = useContext(AuthContext);
+  const { user, loading, userFdb } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
+  const [currentEmail, setCuttrntEmail] = useState("");
   const [rol, setRol] = useState("");
   const [selectedClass, setSelectedClass] = useState([]);
   const roleOptions = ["student", "admin", "instructor"];
@@ -27,7 +29,8 @@ const Dashbord = () => {
       fetch(`http://localhost:5000/role/?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data);
+          console.log(data);
+          setCuttrntEmail(data.email);
           setRol(data.rol);
         });
       fetch(`http://localhost:5000/cart/${userFdb._id}/:${false}`)
@@ -216,7 +219,7 @@ const Dashbord = () => {
             </div>
           </div>
         ) : (
-          ""
+          rol === "instructor" && <MyClasses email={currentEmail} />
         )}
       </div>
     </div>
