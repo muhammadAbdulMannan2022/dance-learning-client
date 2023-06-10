@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const Onlyuser = ({ children }) => {
   const location = useLocation();
   const { user, loading } = useContext(AuthContext);
-  console.log(loading);
+  console.log(loading, user);
   if (!loading) {
     return user ? (
       <>{children}</>
@@ -48,7 +48,15 @@ const Onlyuser = ({ children }) => {
             ></div>
           </div>
         </div>
-        <h1 className="text-3xl text-center mt-10">you have to login</h1>
+        <h1 className="text-3xl text-center mt-10">
+          you have to log in. If you are logged in{" "}
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-purple-200 p-1"
+          >
+            reload
+          </button>
+        </h1>
         <div className="flex justify-center mt-5">
           <Link
             to="/login"

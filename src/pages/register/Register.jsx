@@ -3,11 +3,13 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { AiFillEye, AiFillEyeInvisible, AiFillGithub } from "react-icons/ai";
 import { updateProfile } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [error, setError] = useState("");
-  const { user, gitHubLogin, emailPasswordSignup } = useContext(AuthContext);
+  const { user, gitHubLogin, emailPasswordSignup, setLoading } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleGithubLogin = () => {
     gitHubLogin()
@@ -48,8 +50,15 @@ const Register = () => {
                     "content-type": "application/json",
                   },
                   body: JSON.stringify(radyUser),
-                });
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    console.log(data);
+                  });
                 from.reset();
+                console.log(user);
+                setLoading(false);
+                navigate("/");
               })
               .catch((error) => {
                 setError(error.massage);
