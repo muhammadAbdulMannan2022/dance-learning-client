@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 const PopularInstructors = () => {
   const [slidesPerView, setSlidesPerView] = useState(1);
-
+  const [instructors, setInstructors] = useState([]);
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
@@ -27,6 +27,13 @@ const PopularInstructors = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+  }, []);
+  useEffect(() => {
+    fetch("http://localhost:5000/getinstructor")
+      .then((res) => res.json())
+      .then((data) => {
+        setInstructors(data.slice(0, 6));
+      });
   }, []);
   // TODO: remove the object and add data from DB
   const dancingSchoolInstructors = [
@@ -77,7 +84,8 @@ const PopularInstructors = () => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {dancingSchoolInstructors.map((instructor) => (
+          {/* {console.log(instructors[0])} */}
+          {instructors.map((instructor) => (
             <SwiperSlide className="md:w-[200px]" key={instructor?._id}>
               <ShowInstructor instructor={instructor} />
             </SwiperSlide>

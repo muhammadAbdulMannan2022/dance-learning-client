@@ -34,6 +34,7 @@ const ShowClassCard = ({ danceClass }) => {
       instructorName,
       instructorEmail,
       selectedBy: userId,
+      isPayed: false,
     };
     fetch(`http://localhost:5000/carts/${_id}/${userId}`, {
       method: "POST",
@@ -48,6 +49,13 @@ const ShowClassCard = ({ danceClass }) => {
           Swal.fire({
             position: "top-end",
             text: data?.massege,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            position: "top-end",
+            text: "seclected",
             showConfirmButton: false,
             timer: 1500,
           });
