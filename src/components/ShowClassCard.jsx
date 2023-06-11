@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ShowClassCard = ({ danceClass }) => {
   const { user, loading } = useContext(AuthContext);
   const [userId, setUserId] = useState("");
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
   const {
     _id,
@@ -24,6 +25,7 @@ const ShowClassCard = ({ danceClass }) => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          setRole(data.rol);
           setUserId(data._id);
         });
     }
@@ -67,7 +69,11 @@ const ShowClassCard = ({ danceClass }) => {
       .catch((err) => console.log(err));
   };
   return (
-    <div className="mx-auto w-[400px] h-[500px] bg-white rounded-lg shadow-lg">
+    <div
+      className={`mx-auto w-[400px] h-[500px] ${
+        availableSeats == 0 ? "bg-red-400" : "bg-white"
+      } rounded-lg shadow-lg`}
+    >
       <img
         style={{ height: "200px", width: "400px" }}
         className="w-full rounded"
@@ -84,6 +90,11 @@ const ShowClassCard = ({ danceClass }) => {
         <div className="flex items-center mt-4">
           <span className="text-gray-800 font-bold">${price}</span>
           <button
+            disabled={
+              availableSeats == 0 || role == "instructor" || role == "admin"
+                ? true
+                : false
+            }
             onClick={() => {
               if (user) {
                 handleAddToCart(danceClass, userId);
