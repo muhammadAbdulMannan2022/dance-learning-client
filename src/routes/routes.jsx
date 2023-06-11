@@ -14,6 +14,7 @@ import Payment from "../pages/Dashbord/payment/Payment";
 import Onlyuser from "../private/Onlyuser";
 import Onlyinstructor from "../private/OnlyInstructor";
 import Onlyadmin from "../private/OnlyAdmin";
+import Allinstuctor from "../pages/Allinstructor/Allinstuctor";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/classes",
         element: <Classes />,
+      },
+      {
+        path: "/instructors",
+        element: <Allinstuctor />,
       },
       {
         path: "/login",

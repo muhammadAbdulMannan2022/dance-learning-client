@@ -9,14 +9,14 @@ const ShowInstructor = ({ instructor }) => {
     experience,
   } = instructor;
   return (
-    <div className="max-w-md mx-auto max-h-[500px] bg-white rounded-lg shadow-lg">
+    <div className="mx-auto w-[350px] max-h-[500px] bg-white rounded-lg shadow-lg">
       <img
-        style={{ height: "200px" }}
+        style={{ maxHeight: "250px" }}
         className="w-full"
         src={photoURL}
         alt="user photo not found"
       />
-      <div className="h-3/5 p-4 text-start flex flex-col justify-between">
+      <div className="p-4 text-start flex flex-col justify-between">
         <div>
           <h3 className="text-xl font-bold">{name}</h3>
           <h3 className="text-sm">
@@ -27,7 +27,7 @@ const ShowInstructor = ({ instructor }) => {
             {studentNumber}
           </p> */}
         </div>
-        <div className="flex items-center mt-4">
+        <div className="flex items-center mt-10">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             view details
           </button>

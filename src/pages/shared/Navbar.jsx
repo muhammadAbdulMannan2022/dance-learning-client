@@ -33,12 +33,12 @@ const Navbar = () => {
           <HiOutlineX className="w-10 h-10" />
         </div>
         <ul className="flex flex-col md:flex-row mt-10 md:mt-0 gap-4 transition-colors">
-          <Link>
+          <Link to="/">
             <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
               Home
             </li>
           </Link>
-          <Link>
+          <Link to="/instructors">
             <li className="hover:bg-slate-700 transition-colors p-5 md:px-5 md:py-2 cursor-pointer text-center font-bold">
               Instructors
             </li>
