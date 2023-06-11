@@ -85,22 +85,24 @@ const PopularClass = () => {
     <div>
       {console.log(danceClasses)}
       <SectionTitle title={"Popular Classes"} />
-      <div className="my-5">
-        <Swiper
-          slidesPerView={slidesPerView}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
-          className="mySwiper lg:slides-per-view-3"
-        >
-          {danceClasses.map((danceClass) => (
-            <SwiperSlide key={danceClass?._id}>
-              <ShowClassCard danceClass={danceClass} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <div className="my-5 flex justify-center items-center">
+        <div className="max-w-[1200px]">
+          <Swiper
+            slidesPerView={slidesPerView}
+            spaceBetween={30}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination]}
+            className="mySwiper lg:slides-per-view-3"
+          >
+            {danceClasses.map((danceClass) => (
+              <SwiperSlide key={danceClass?._id}>
+                <ShowClassCard danceClass={danceClass} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </div>
   );

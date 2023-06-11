@@ -10,9 +10,11 @@ const Allinstuctor = () => {
   });
   return (
     <div className="flex flex-wrap px-5 py-8 md:px-10 lg:px-20 justify-center gap-3">
-      {instructors.map((instructor) => (
-        <ShowInstructor key={instructor._id} instructor={instructor} />
-      ))}
+      <div className="max-w-[1200px] flex flex-wrap">
+        {instructors.map((instructor) => (
+          <ShowInstructor key={instructor._id} instructor={instructor} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -73,24 +73,26 @@ const PopularInstructors = () => {
   return (
     <div className="my-20">
       <SectionTitle title={"Popular Instrucktors"} />
-      <div className="my-5 py-5">
+      <div className="my-5 py-5 flex justify-center items-center">
         {/* {console.log(slidesPerView)} */}
-        <Swiper
-          slidesPerView={slidesPerView}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
-          className="mySwiper"
-        >
-          {/* {console.log(instructors[0])} */}
-          {instructors.map((instructor) => (
-            <SwiperSlide className="md:w-[200px]" key={instructor?._id}>
-              <ShowInstructor instructor={instructor} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className="max-w-[1200px]">
+          <Swiper
+            slidesPerView={slidesPerView}
+            spaceBetween={30}
+            pagination={{
+              clickable: true,
+            }}
+            modules={[Pagination]}
+            className="mySwiper"
+          >
+            {/* {console.log(instructors[0])} */}
+            {instructors.map((instructor) => (
+              <SwiperSlide className="md:w-[200px]" key={instructor?._id}>
+                <ShowInstructor instructor={instructor} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import Onlyuser from "../private/Onlyuser";
 import Onlyinstructor from "../private/OnlyInstructor";
 import Onlyadmin from "../private/OnlyAdmin";
 import Allinstuctor from "../pages/Allinstructor/Allinstuctor";
+import Error from "../pages/Error/Error";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
         element: <Payment />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);
 export default router;
