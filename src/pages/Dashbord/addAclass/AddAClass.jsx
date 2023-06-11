@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
-
+import Swal from "sweetalert2";
 const image_token = import.meta.env.VITE_apiKey_imgbb;
 const AddAClass = () => {
   const { user } = useContext(AuthContext);
@@ -65,10 +65,13 @@ const AddAClass = () => {
             });
             const returnData = await res.json();
             console.log(returnData);
+            Swal.fire("success", "class added successful", "success");
           } catch (error) {
             console.log(error);
+            Swal.fire("Error", "image upload faild", "error");
           }
         } else {
+          Swal.fire("Error", "image upload faild", "error");
           throw new Error("Image upload failed");
         }
       } catch (error) {
