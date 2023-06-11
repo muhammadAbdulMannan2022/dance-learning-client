@@ -18,7 +18,7 @@ const Dashbord = () => {
     }, {})
   );
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://hello-summer-server.vercel.app/users")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -26,14 +26,16 @@ const Dashbord = () => {
       });
     // console.log(loading);
     if (!loading) {
-      fetch(`http://localhost:5000/role/?email=${user.email}`)
+      fetch(`https://hello-summer-server.vercel.app/role/?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
           setCuttrntEmail(data.email);
           setRol(data.rol);
         });
-      fetch(`http://localhost:5000/cart/${userFdb._id}/:${false}`)
+      fetch(
+        `https://hello-summer-server.vercel.app/cart/${userFdb._id}/:${false}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -60,13 +62,16 @@ const Dashbord = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const newUserRol = { rol: newRole };
-        fetch(`http://localhost:5000/makeinstructor/${userId}`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(newUserRol),
-        })
+        fetch(
+          `https://hello-summer-server.vercel.app/makeinstructor/${userId}`,
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newUserRol),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

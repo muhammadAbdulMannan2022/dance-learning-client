@@ -13,7 +13,7 @@ const Chackout = ({ classToPayId }) => {
   useEffect(() => {
     if (!loading) {
       console.log(user.email);
-      fetch("http://localhost:5000/create-payment-intent", {
+      fetch("https://hello-summer-server.vercel.app/create-payment-intent", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -78,13 +78,16 @@ const Chackout = ({ classToPayId }) => {
       setProssing(false);
     } else {
       try {
-        const res = await fetch(`http://localhost:5000/updatepay`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ classToPayId, userEmail: user.email }),
-        });
+        const res = await fetch(
+          `https://hello-summer-server.vercel.app/updatepay`,
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ classToPayId, userEmail: user.email }),
+          }
+        );
         const data = await res.json();
         console.log(data);
       } catch (error) {

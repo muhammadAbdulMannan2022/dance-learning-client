@@ -56,13 +56,16 @@ const AddAClass = () => {
               status: "panding",
             };
 
-            const res = await fetch(`http://localhost:5000/classes`, {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(theClass),
-            });
+            const res = await fetch(
+              `https://hello-summer-server.vercel.app/classes`,
+              {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify(theClass),
+              }
+            );
             const returnData = await res.json();
             console.log(returnData);
             Swal.fire("success", "class added successful", "success");

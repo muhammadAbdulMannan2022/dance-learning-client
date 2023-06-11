@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 const ManageClass = () => {
   const [clssses, setClasses] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/classes/all`)
+    fetch(`https://hello-summer-server.vercel.app/classes/all`)
       .then((res) => res.json())
       .then((data) => {
         setClasses(data);
@@ -50,13 +50,16 @@ const ManageClass = () => {
             showLoaderOnConfirm: true,
             preConfirm: (login) => {
               newStatus = { status: newRole, review: login };
-              fetch(`http://localhost:5000/classes/status/${classId}`, {
-                method: "PATCH",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(newStatus),
-              })
+              fetch(
+                `https://hello-summer-server.vercel.app/classes/status/${classId}`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(newStatus),
+                }
+              )
                 .then((res) => res.json())
                 .then((data) => {
                   console.log(data);
@@ -69,13 +72,16 @@ const ManageClass = () => {
             },
           });
         } else {
-          fetch(`http://localhost:5000/classes/status/${classId}`, {
-            method: "PATCH",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(newStatus),
-          })
+          fetch(
+            `https://hello-summer-server.vercel.app/classes/status/${classId}`,
+            {
+              method: "PATCH",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newStatus),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               console.log(data);

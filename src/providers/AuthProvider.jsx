@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       if (user) {
         setLoading(true);
         console.log(loading);
-        fetch(`http://localhost:5000/user?email=${user.email}`)
+        fetch(`https://hello-summer-server.vercel.app/user?email=${user.email}`)
           .then((res) => res.json())
           .then((data) => {
             setUserFdb(data);

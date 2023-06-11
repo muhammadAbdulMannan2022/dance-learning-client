@@ -6,7 +6,9 @@ const EnrolledClass = () => {
   const [enrolledClass, setEnrolledClass] = useState([]);
   useEffect(() => {
     if (!loading) {
-      fetch(`http://localhost:5000/cart/${userFdb._id}/:${true}`)
+      fetch(
+        `https://hello-summer-server.vercel.app/cart/${userFdb._id}/:${true}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

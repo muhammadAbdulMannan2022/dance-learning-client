@@ -4,7 +4,9 @@ import Swal from "sweetalert2";
 const MyClasses = ({ email }) => {
   const [classesData, setClassesData] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/instructorclass?email=${email}`)
+    fetch(
+      `https://hello-summer-server.vercel.app/instructorclass?email=${email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setClassesData(data);

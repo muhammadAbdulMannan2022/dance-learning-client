@@ -34,7 +34,7 @@ const PopularClass = () => {
   // TODO: add enrolded student number and sort the data by the number
 
   useEffect(() => {
-    fetch(`http://localhost:5000/classes`)
+    fetch(`https://hello-summer-server.vercel.app/classes`)
       .then((res) => res.json())
       .then((data) => {
         const sorted = data.sort(

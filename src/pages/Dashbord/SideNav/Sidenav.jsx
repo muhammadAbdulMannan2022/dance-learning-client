@@ -16,7 +16,7 @@ const Sidenav = () => {
   const [rol, setRol] = useState("");
   useEffect(() => {
     if (!loading) {
-      fetch(`http://localhost:5000/role/?email=${user.email}`)
+      fetch(`https://hello-summer-server.vercel.app/role/?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

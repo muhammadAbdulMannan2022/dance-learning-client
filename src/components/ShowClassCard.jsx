@@ -20,7 +20,7 @@ const ShowClassCard = ({ danceClass }) => {
   const shortInfo = info.slice(0, 50);
   useEffect(() => {
     if (!loading && user) {
-      fetch(`http://localhost:5000/role?email=${user.email}`)
+      fetch(`https://hello-summer-server.vercel.app/role?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -38,7 +38,7 @@ const ShowClassCard = ({ danceClass }) => {
       selectedBy: userId,
       isPayed: false,
     };
-    fetch(`http://localhost:5000/carts/${_id}/${userId}`, {
+    fetch(`https://hello-summer-server.vercel.app/carts/${_id}/${userId}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

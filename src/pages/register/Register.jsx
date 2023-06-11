@@ -44,7 +44,7 @@ const Register = () => {
                   photoURL: imageUrl.value,
                   rol: "student",
                 };
-                fetch("http://localhost:5000/users", {
+                fetch("https://hello-summer-server.vercel.app/users", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",

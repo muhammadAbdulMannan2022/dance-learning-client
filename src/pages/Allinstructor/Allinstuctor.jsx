@@ -4,7 +4,7 @@ import ShowInstructor from "../../components/ShowInstructor";
 const Allinstuctor = () => {
   const [instructors, setInstructors] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/getinstructor")
+    fetch("https://hello-summer-server.vercel.app/getinstructor")
       .then((res) => res.json())
       .then((data) => setInstructors(data));
   });
